@@ -2,14 +2,15 @@ FROM python:3.11-slim
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
-    chromium \
-    unzip \
     wget \
+    unzip \
     curl \
+    libnss3 \
+    chromium \
     && rm -rf /var/lib/apt/lists/*
 
-# Install matching ChromeDriver (v114)
-RUN wget https://storage.googleapis.com/chrome-for-testing-public/114.0.5735.90/linux64/chromedriver-linux64.zip \
+# Download ChromeDriver v114 from new structure
+RUN wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/114.0.5735.90/linux64/chromedriver-linux64.zip \
     && unzip chromedriver-linux64.zip \
     && mv chromedriver-linux64/chromedriver /usr/bin/chromedriver \
     && chmod +x /usr/bin/chromedriver \
